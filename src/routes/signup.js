@@ -4,15 +4,61 @@ const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient()
 const bcrypt = require('bcrypt')
 const validator = require ('validator')
+const jwt = require('jsonwebtoken')
 
+/**
+ * @swagger
+ * /user/signup:
+ *    post:
+ *      summary: create a new user
+ *      tags: [User]
+ *      description: create a new user
+ *      parameters:
+ *        - in: body
+ *          schema:
+ *            type: object
+ *            required: [email, password,first_name,last_name,re-password]
+ *            description: user's model
+ *            properties:
+ *              email:
+ *                type: string
+ *              password:
+ *                type: string
+ *              re-password:
+ *                type: string
+ *              first_name:
+ *                type: string
+ *              last_name:
+ *                type: string
+ * 
+ *      responses:
+ *        201:
+ *          description: created
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                description: signup response
+ *                properties:
+ *                  token:
+ *                    type: string
+ *        400:
+ *          description: incomplete info  
+ *        401:
+ *          description: passwords should match 
+ *        402:
+ *          description: invalid email
+ *        404:
+ *          description: something went wrong        
+ */
 
 router.post('/user/signup', async (req,res) => {
     try{
         const input = req.body
-        if(!input.email || !input.password || !input.last_name || !input.first_name || !req.body.re-password){
+        if(!input.email || !input.password || !input.last_name || !input.first_name || !req.body.re_password){
             return res.status(400).send ('incomplete info')
         }
-        if(!input.password === input.re-password){
+        if(!input.password === input.re_password){
             return res.status(401).send('passwords should match')
         }     
 
@@ -30,8 +76,9 @@ router.post('/user/signup', async (req,res) => {
                 email:req.body.email
             }
         })
-        console.log(user)
-        res.status(200).send()}catch(e){
+        const token = jwt.sign({ id: user.id.toString() }
+        , process.env.JWTKEY);
+        res.status(201).send({token})}catch(e){
             res.status(404).send(e.message)
         }
 })
