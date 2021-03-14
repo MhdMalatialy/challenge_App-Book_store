@@ -2,6 +2,7 @@ const express = require('express')
 require('dotenv').config({ path: 'src/.env' })
 const {Sequelize} = require('sequelize')
 const signupRouter = require('./routes/signup')
+const signinRouter = require('./routes/signin')
 const app = express()
 const bodyParser = require('body-parser')
 
@@ -37,6 +38,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(signupRouter)
+app.use(signinRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const PORT = process.env.PORT
 connectDB()
