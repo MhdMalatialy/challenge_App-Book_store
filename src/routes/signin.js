@@ -31,7 +31,7 @@ const jwt = require('jsonwebtoken')
  *            application/json:
  *              schema:
  *                type: object
- *                description: signin response
+ *                description: login response
  *                properties:
  *                  token:
  *                    type: string
