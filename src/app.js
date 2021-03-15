@@ -3,6 +3,7 @@ require('dotenv').config({ path: 'src/.env' })
 const {Sequelize} = require('sequelize')
 const signupRouter = require('./routes/signup')
 const signinRouter = require('./routes/signin')
+const verifyRouter = require('./routes/verification')
 const app = express()
 const bodyParser = require('body-parser')
 

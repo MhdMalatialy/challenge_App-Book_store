@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 const bcrypt = require('bcrypt')
 const validator = require ('validator')
 const jwt = require('jsonwebtoken')
-
+const sendVerifyEmail = require('./verification')
 /**
  * @swagger
  * /user/signup:
@@ -76,9 +76,8 @@ router.post('/user/signup', async (req,res) => {
                 email:req.body.email
             }
         })
-        const token = jwt.sign({ id: user.id.toString() }
-        , process.env.JWTKEY);
-        res.status(201).send({token})}catch(e){
+        sendVerifyEmail(user)
+        res.status(201).send()}catch(e){
             res.status(404).send(e.message)
         }
 })
