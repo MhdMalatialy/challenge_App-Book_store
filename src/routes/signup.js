@@ -4,8 +4,7 @@ const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient()
 const bcrypt = require('bcrypt')
 const validator = require ('validator')
-const jwt = require('jsonwebtoken')
-const sendVerifyEmail = require('./verification')
+const sendVerifyEmail = require('../services/sendVerifyEmail')
 /**
  * @swagger
  * /user/signup:

@@ -40,6 +40,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(signupRouter)
 app.use(signinRouter)
+app.use(verifyRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const PORT = process.env.PORT
 connectDB()

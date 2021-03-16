@@ -1,15 +1,14 @@
 const nodemailer = require('nodemailer');
-require('dotenv').config({ path: '../src/.env' })
+require('dotenv').config({ path: './src/.env' })
 const sendEmail = async function (email, header, subject, body) {
 try{
-  if (email.match(/(@test.com||@example.com)$/)[0]) {
-    return console.log(email);
-  }
-
+  // if (email.match(/(@test.com||@example.com)$/)[0]) {
+  //   return console.log(email);
+  // }
  const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
-    secure: true, // true for 465, false for other ports
+    secure: true, 
     auth: {
       user: process.env.EMAIL,
       pass: process.env.PASSWORD,
@@ -19,7 +18,6 @@ try{
       rejectUnauthorized: false,
     },
   });
- 
   await transporter.sendMail({
     from: '"Book-Store" <email>',
     to: email, 
