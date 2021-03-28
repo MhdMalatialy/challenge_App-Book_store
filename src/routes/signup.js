@@ -54,15 +54,18 @@ const sendVerifyEmail = require('../services/sendVerifyEmail')
 router.post('/user/signup', async (req,res) => {
     try{
         const input = req.body
-        if(!input.email || !input.password || !input.last_name || !input.first_name || !req.body.re_password){
+        if(!input.email || !input.password || !input.last_name 
+            || !input.first_name || !req.body.re_password){
             return res.status(400).send ('incomplete info')
         }
         if(!input.password === input.re_password){
-            return res.status(401).send('passwords should match')
+            return res.status(401)
+            .send('passwords should match')
         }     
 
             if(!validator.isEmail(req.body.email)){
-               return res.status(402).send('email should be like: example@example.com')
+               return res.status(402)
+               .send('email should be like: example@example.com')
             }              
        
         const hashedPassword = await bcrypt.hash(req.body.password,8)

@@ -18,7 +18,8 @@
   },
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "prepare": "npx prisma generate"
   },
   "devDependencies": {
     "prisma": "^2.18.0"
