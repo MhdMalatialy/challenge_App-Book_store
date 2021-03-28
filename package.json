@@ -22,5 +22,19 @@
   },
   "devDependencies": {
     "prisma": "^2.18.0"
-  }
+  },
+  "name": "challenge_app-book_store",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MhdMalatialy/challenge_App-Book_store.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MhdMalatialy/challenge_App-Book_store/issues"
+  },
+  "homepage": "https://github.com/MhdMalatialy/challenge_App-Book_store#readme"
 }
