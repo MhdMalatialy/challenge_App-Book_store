@@ -27,6 +27,10 @@
   "description": "",
   "version": "1.0.0",
   "main": "index.js",
+  "engines":{
+    "node": "15.2.0",
+    "npm":"7.0.8"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MhdMalatialy/challenge_App-Book_store.git"
