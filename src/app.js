@@ -9,7 +9,14 @@ const bodyParser = require('body-parser')
 
 //connect to the database
 async function connectDB() {
-  const sequeilize = new Sequelize(process.env.DATABASE_URL)
+  const sequeilize = new Sequelize(process.env.DATABASE_URL,{
+    dialect: 'postgres',
+    logging: false,
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false,
+      }
+    }})
   try{
       await sequeilize.authenticate()
       console.log('Connected Successfully to Database')
