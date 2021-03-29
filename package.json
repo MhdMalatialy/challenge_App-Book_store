@@ -19,7 +19,7 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "heroku-postbuild":"npx prisma migrate dev --preview-feature && npx prisma generate --schema=src/prisma/schema.prisma"
+    "heroku-postbuild":"npx prisma migrate dev --preview-feature --schema=src/prisma/schema.prisma && npx prisma generate --schema=src/prisma/schema.prisma"
   },
   "devDependencies": {
     "prisma": "^2.18.0"
