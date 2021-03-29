@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 const bcrypt = require('bcrypt')
 const validator = require ('validator')
 const jwt = require('jsonwebtoken')
-
+const passportGoogle = require('../services/googleAuth')
 /**
  * @swagger
  * /user/login:
@@ -73,4 +73,58 @@ router.post('/user/login',async (req,res) => {
         res.status(404).send(e.message)
     }
 })
+
+/**
+ * @swagger
+ * /auth/google:
+ *    get:
+ *      summary: The button which redirects the user to the google login page
+ *      tags: [User]
+ *      description: login via google
+ */
+ router.get('/auth/google', passportGoogle.authenticate('google',
+ {scope: ['profile', 'email'], session: false }))
+
+/**
+ * @swagger
+ * /auth/google/redirect:
+ *    get:
+ *      summary: this end point will called by default when the user logged in using google
+ *      tags: [User]
+ *      description: login using google and returns token
+ *      parameters:
+ *        - in: header
+ *          schema:
+ *            type: object
+ *            required: [token]
+ *            description: user's token
+ *            properties:
+ *              token:
+ *                type: string
+ *      responses:
+ *        201:
+ *          description: login successfully
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                description: sign in response
+ *                properties:
+ *                  token:
+ *                    type: string
+ *        401:
+ *          description: login failed
+ */
+router.get('/auth/google/redirect',
+passportGoogle.authenticate('google', 
+{ session: false, failureRedirect: `${process.env.URL}` })
+, (req, res) => {
+
+    const token = req.user.token
+    const user =  req.user.user
+    if (!token){
+        return res.status(404).send()
+    }
+    res.status(201).send({token,user})
+});
 module.exports=router
