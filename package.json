@@ -18,7 +18,8 @@
   },
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "heroku-postbuild":"npx prisma generate --schema=src/prisma/schema.prisma"
   },
   "devDependencies": {
     "prisma": "^2.18.0"
