@@ -9,17 +9,18 @@ passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID, 
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 },
-  async (
-   accessToken, refreshToken,profile, done) => {
+  async (accessToken, refreshToken,profile, done) => {
        let user
     try {
       const email = profile.emails && profile.emails[0].value;
       const name = profile.name
+      const googleId = profile.id
         user = await prisma.user.upsert(
           {
-              where:{email},
+              where:{googleId},
               update:{},
-              create:{email,
+              create:{googleId,
+                email,
                 first_name:name.givenName,
                 last_name: name.familyName
             }
@@ -27,11 +28,10 @@ passport.use(new GoogleStrategy({
       if (user.activated===false){
         user = await prisma.user.update({
             where:{
-            email},
+                googleId},
             data:{
                 activated:true}})
       }
-      console.log(user)
       const token = jwt.sign({_id:user.id}, process.env.JWTKEY,{
         expiresIn: 604800 // 1 week
       });

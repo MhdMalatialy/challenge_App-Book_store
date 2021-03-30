@@ -12,6 +12,7 @@ model user{
     email String @unique 
     password String ?
     activated Boolean @default(false)
+    googleId String ? @unique
 }
 model secretCode{
     email String @unique
