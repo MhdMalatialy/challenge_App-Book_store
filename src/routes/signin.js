@@ -69,8 +69,9 @@ router.post('/user/login',async (req,res) => {
     }
     const token = jwt.sign({ id: user.id.toString() }
     , process.env.JWTKEY);
-    res.status(200).send({token})}catch(e){
-        res.status(404).send(e.message)
+    return res.status(200).cookie('login', {user,token}).send({token})
+}catch(e){
+        return res.status(404).send(e.message)
     }
 })
 
@@ -125,6 +126,16 @@ passportGoogle.authenticate('google',
     if (!token){
         return res.status(404).send()
     }
-    res.status(201).send({token,user})
+     return res.status(201).send({token,user})
 });
+router.get('/current_user', (req, res) => {
+    return res.status(201).send(req.cookies.login ? req.cookies.login:"login please");
+    
+  })
+
+  
+router.get('/user/logout', (req,res) => {
+    res.clearCookie('login')
+    res.send('done')
+})
 module.exports=router

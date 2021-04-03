@@ -4,9 +4,13 @@ const {Sequelize} = require('sequelize')
 const signupRouter = require('./routes/signup')
 const signinRouter = require('./routes/signin')
 const verifyRouter = require('./routes/verification')
+// const passport = require('passport');
+const cookie_parser=require('cookie-parser')
 const app = express()
 const bodyParser = require('body-parser')
-
+app.use(cookie_parser(process.env.COOKIE_KEY))
+// app.use(passport.initialize());
+// app.use(passport.session());
 //connect to the database
 async function connectDB() {
   const sequeilize = new Sequelize(process.env.DATABASE_URL,{
