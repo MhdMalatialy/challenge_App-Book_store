@@ -18,7 +18,7 @@ class App extends Component {
            <div>
                <Header/>               
            </div>
-           <div  className="grid-container">
+           <div className="grid-container">
                <Route exact path="/" component={welcome}/>
                <Route  path="/user" component={newPost}/>
            </div>           

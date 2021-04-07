@@ -48,6 +48,7 @@ const passportGoogle = require('../services/googleAuth')
  */
 router.post('/user/login',async (req,res) => {
     const input = req.body
+    console.log(req.body)
     if(!input.email || !input.password){
        return res.status(400).send('incomplete info')
     }
@@ -129,7 +130,7 @@ passportGoogle.authenticate('google',
      return res.status(201).cookie('login', {user,token}).redirect('/')
 });
 router.get('/current_user', (req, res) => {
-    return res.status(201).send(req.cookies.login ? req.cookies.login:"login please");
+    return res.status(201).send(req.cookies.login ? req.cookies.login:"");
     
   })
 
