@@ -3,25 +3,33 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Header from './Header'
+import Landing from './landing'
+// import 'foundation-sites/js/foundation.core'
 
-const welcome = () => <p>welcome</p>
-const newPost = () => <h2>newPost</h2>
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './landing.css'
 
+{/* <Link to={} className=""></ink> */}
 class App extends Component {
     componentDidMount() {
+        
       this.props.fetchUser();
     }
+    
     render(){
     return(
+        
         <div>
            <BrowserRouter>
+
            <div>
-               <Header/>               
+               <Header/> 
+               <Landing/>
+
            </div>
            <div className="grid-container">
-               <Route exact path="/" component={welcome}/>
-               <Route  path="/user" component={newPost}/>
-           </div>           
+               {/* <Route exact path="/user" component={}/> */}
+           </div>     
            </BrowserRouter>
         </div>   
     )
