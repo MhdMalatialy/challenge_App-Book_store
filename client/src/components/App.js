@@ -11,8 +11,7 @@ import './landing.css'
 
 {/* <Link to={} className=""></ink> */}
 class App extends Component {
-    componentDidMount() {
-        
+    componentDidMount() {  
       this.props.fetchUser();
     }
     
@@ -25,7 +24,6 @@ class App extends Component {
            <div>
                <Header/> 
                <Landing/>
-
            </div>
            <div className="grid-container">
                {/* <Route exact path="/user" component={}/> */}

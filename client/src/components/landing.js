@@ -1,6 +1,6 @@
 import {Component} from 'react'
 import { connect } from 'react-redux'
-import { Button,Container,Row ,Col,Image,Spinner,Card} from 'react-bootstrap';
+import { Button,Container,Row ,Col,Form,Spinner,Card,FormControl,ButtonGroup} from 'react-bootstrap';
 class Landing extends Component {
   renderContent(){
     switch(this.props.auth){
@@ -57,7 +57,7 @@ class Landing extends Component {
   <Card.Body>
     <Card.Title>Login using Google</Card.Title>
     <div class="google-btn" id="shadow">
-      <a >
+      <a href="/auth/google">
   <div class="google-icon-wrapper">
     <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
   </div>
@@ -74,7 +74,42 @@ class Landing extends Component {
 
         )
       default:
-        return 
+        return (
+          <Container>
+            <Row>
+              <div class="welcome-box">
+                <div>
+                  <h1 class="welcome-h1">
+                    Book-Store
+                  </h1>
+                  <h2 class="welcome-h2">
+                    The book which you looking for is here
+                  </h2>
+                </div>
+              </div>
+            </Row>
+            <Row>
+              <div class="search-box">
+                  <Form>
+                    <Container>
+                      <Row>
+                        <FormControl type="text" placeholder="Search" />
+                      </Row>
+                        <div class="button-style">
+                          < Button variant="primary" size="lg" block>
+                            Block level button
+                          </Button>
+                          <Button variant="secondary" block>
+                            Block level button
+                          </Button>
+                        </div>
+                 
+                    </Container>
+                  </Form>
+              </div>
+            </Row>
+          </Container>
+        )
     }
   }
     render(){
