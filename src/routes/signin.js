@@ -48,12 +48,11 @@ const passportGoogle = require('../services/googleAuth')
  */
 router.post('/user/login',async (req,res) => {
     const input = req.body
-    console.log(req.body)
     if(!input.email || !input.password){
        return res.status(400).send('incomplete info')
     }
     if(!validator.isEmail(input.email)){
-        return res.status(402).send('invalid email')
+         res.status(402).send('invalid email')
     }
     try{
         const user = await prisma.user.findUnique({
@@ -64,18 +63,25 @@ router.post('/user/login',async (req,res) => {
       if(!user) {
         return res.status(401).send('undefined user')
     }
+    if(user.googleId){
+        return res.status(401).send('use google to login please')
+    }
     const isMatch = await bcrypt.compare(input.password,user.password)
     if(!isMatch) {
         return res.status(403).send('incorrect password')
     }
+    if(!user.activated){
+        const unActivatedUser = user
+        return res.status(200).cookie('login', {unActivatedUser}).redirect('/')
+    }
     const token = jwt.sign({ id: user.id.toString() }
     , process.env.JWTKEY);
+
     return res.status(200).cookie('login', {user,token}).redirect('/')
 }catch(e){
         return res.status(404).send(e.message)
     }
 })
-
 /**
  * @swagger
  * /auth/google:
@@ -132,11 +138,11 @@ passportGoogle.authenticate('google',
 router.get('/current_user', (req, res) => {
     return res.status(201).send(req.cookies.login ? req.cookies.login:"");
     
-  })
-
-  
+  }) 
 router.get('/user/logout', (req,res) => {
     res.clearCookie('login')
+    res.clearCookie('signup')
     res.redirect('/')
 })
+
 module.exports=router

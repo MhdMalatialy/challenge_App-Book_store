@@ -1,4 +1,4 @@
-import react ,{Component} from 'react'
+import {Component} from 'react'
 import { connect } from 'react-redux'
 
 class Header extends Component {
@@ -8,35 +8,33 @@ class Header extends Component {
         return 
       case false:
         return (
-      <div class="top-bar">
-        <div class="top-bar-left">
-          <ul class=" menu">
-            <li class="menu-text">
-              <a href="/auth/google">Book-Store</a></li>
-            {/* <li><a><button type="button" class="button alert">Sign in with Google</button></a></li> */}
+      <div className="top-bar">
+        <div className="top-bar-left">
+          <ul className=" menu">
+            <li className="menu-text">
+              <a href="/">Book-Store</a></li>
           </ul>
         </div>
-        <div class="top-bar-right">
-          <form class="menu">
-            <li><input type="search" placeholder="email"/></li>
-            <li><input type="search" placeholder="password"/></li>
-            <li><button type="button" class="button">Login</button></li>
+        <div className="top-bar-right">
+          <form action='/user/login' className="menu" method="post">
+            <li><input type="text" placeholder="email" name='email'/></li>
+            <li><input type="password" placeholder="password" name='password'/></li>
+            <li><button type="submit" className="button">Login</button></li>
           </form>
         </div>
       </div>)
       default:
         return (
-          <div class="top-bar">
-            <div class="top-bar-left">
-              <ul class=" menu">
-                <li class="menu-text">
+          <div className="top-bar">
+            <div className="top-bar-left">
+              <ul className=" menu">
+                <li className="menu-text">
                   <a href="/">Book-Store</a></li>
-                {/* <li><a><button type="button" class="button alert">Sign in with Google</button></a></li> */}
               </ul>
             </div>
-            <div class="top-bar-right">
-              <form class="menu">
-                <li><a href = "/user/logout"><button type="button" class="button">Logout</button></a></li>
+            <div className="top-bar-right">
+              <form className="menu">
+                <li><a href = "/user/logout"><button type="button" className="button">Logout</button></a></li>
               </form>
             </div>
           </div>)

@@ -8,6 +8,11 @@ const verifyRouter = require('./routes/verification')
 const cookie_parser=require('cookie-parser')
 const app = express()
 const bodyParser = require('body-parser')
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000/"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(cookie_parser(process.env.COOKIE_KEY))
 // app.use(passport.initialize());
 // app.use(passport.session());

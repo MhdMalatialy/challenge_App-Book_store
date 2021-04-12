@@ -1,67 +1,39 @@
 import {Component} from 'react'
 import { connect } from 'react-redux'
-import { Button,Container,Row ,Col,Form,Spinner,Card,FormControl,ButtonGroup} from 'react-bootstrap';
+import { Button,Container,Row ,Col,Form,Spinner,Card,FormControl} from 'react-bootstrap';
+import SIGNUP from './signup'
 class Landing extends Component {
   renderContent(){
+    console.log(this.props.auth)
     switch(this.props.auth){
       case null:
-        return <Spinner animation="grow" />
+        return <Spinner className ="center" animation="grow" />
       case false:
           return(
     <div>
       <Container>
       <Row>
       <Col>
-          <div class="login-box position-left">
+          <div className="login-box position-left">
             <div >
-            <div class="large-12 columns">
-            <Card>
-              <div class="center">
-            <Card.Header>Signup</Card.Header></div>
-            <Card.Body>
-              <form>
-                <div>
-                  <label class="label"> smile</label>
-                  <input type="text" name="username" placeholder="Username" />
-                </div>
-                <div>
-                  <label class="label"> smile</label>
-                  <input type="text" name="username" placeholder="Username" />
-                </div>
-                <div>
-                    <label class="label"> smile</label>
-                    <input type="password" name="password" placeholder="Password" />
-                </div>
-                <div>
-                  <label class="label"> smile</label>
-                  <input type="password" name="password" placeholder="Password" />
-                </div>
-                <div>
-                  <label class="label"> smile</label>                  
-                  <input type="password" name="password" placeholder="Password" />
-                </div>
-                <div class="center">
-                  <Button variant="outline-primary" size="lg" class="center">Signup</Button>
-                </div>
-              </form>
-          </Card.Body>
-          </Card>
+              <div className="large-12 columns">
+                <SIGNUP/>
           </div>
           </div>
           </div>
         </Col>
         <Col>
-  <div class="google-box">
+  <div className="google-box">
         <Card>
   <Card.Header>Social login</Card.Header>
   <Card.Body>
     <Card.Title>Login using Google</Card.Title>
-    <div class="google-btn" id="shadow">
+    <div className="google-btn" id="shadow">
       <a href="/auth/google">
-  <div class="google-icon-wrapper">
-    <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+  <div className="google-icon-wrapper">
+    <img className="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
   </div>
-  <p class="btn-text"><b>Sign in with google</b></p>
+  <p className="btn-text"><b>Sign in with google</b></p>
     </a>
   </div>
   </Card.Body>
@@ -74,28 +46,29 @@ class Landing extends Component {
 
         )
       default:
+        if(this.props.auth.user){
         return (
           <Container>
             <Row>
-              <div class="welcome-box">
+              <div className="welcome-box">
                 <div>
-                  <h1 class="welcome-h1">
+                  <h1 className="welcome-h1">
                     Book-Store
                   </h1>
-                  <h2 class="welcome-h2">
+                  <h2 className="welcome-h2">
                     The book which you looking for is here
                   </h2>
                 </div>
               </div>
             </Row>
             <Row>
-              <div class="search-box">
-                  <Form>
+              <div className="search-box">
+                  <Form >
                     <Container>
                       <Row>
                         <FormControl type="text" placeholder="Search" />
                       </Row>
-                        <div class="button-style">
+                        <div className="button-style">
                           < Button variant="primary" size="lg" block>
                             Block level button
                           </Button>
@@ -108,8 +81,22 @@ class Landing extends Component {
                   </Form>
               </div>
             </Row>
-          </Container>
-        )
+          </Container> )
+          }
+          else{
+            return(
+            <div className="welcome-box">
+            <div>
+                <h1 className="welcome-h1">
+                    Welcome to Book-Store
+                </h1>
+                <h2 className="welcome-h2">
+                Check your email to verify your account
+                </h2>
+            </div>
+      </div>)
+          }
+       
     }
   }
     render(){

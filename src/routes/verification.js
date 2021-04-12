@@ -40,15 +40,15 @@ router.get('/verification/:userId/:secretCode', async (req, res) => {
     const { userId, secretCode } = req.params;
         const id = parseInt(userId,10)
     try {
-        const user =  await prisma.user.findUnique({
+        const preActiveUser =  await prisma.user.findUnique({
             where: {
                 id
             },
         })
-        if (!user) {
+        if (!preActiveUser) {
             return res.status(401).send('user not found')
         }
-        if (user.activated){
+        if (preActiveUser.activated){
             return res.status(400).send('already activated')
         }
         const theSecretCode = await prisma.secretCode.findFirst({
@@ -59,22 +59,23 @@ router.get('/verification/:userId/:secretCode', async (req, res) => {
         if (!theSecretCode){
             return res.status(402).send('the link is invalid')
         }
-        await prisma.secretCode.delete({
-            where :{
-                email: user.email
-            }
-        });
-        const updateUser = await prisma.user.update({
+
+        const user = await prisma.user.update({
             where: {
-                email: user.email,
+                email: preActiveUser.email,
             },
             data: {
                 activated: true,
             },
         })
-        const token = jwt.sign({ id: updateUser.id.toString() }
+        await prisma.secretCode.delete({
+            where :{
+                email: preActiveUser.email
+            }
+        });
+        const token = jwt.sign({ id: user.id.toString() }
         , process.env.JWTKEY);
-        res.status(200).send({token});
+        res.status(200).clearCookie('login').cookie('login', {user,token}).redirect('/')
     } catch (e) {
         res.status(404).send(e.message);
     }

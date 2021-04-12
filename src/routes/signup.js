@@ -31,7 +31,7 @@ const sendVerifyEmail = require('../services/sendVerifyEmail')
  *                type: string
  * 
  *      responses:
- *        201:
+ *        200:
  *          description: created
  *          content:
  *            application/json:
@@ -56,13 +56,12 @@ router.post('/user/signup', async (req,res) => {
         const input = req.body
         if(!input.email || !input.password || !input.last_name 
             || !input.first_name || !req.body.re_password){
-            return res.status(400).send ('incomplete info')
+            return res.status(400).send('incomplete info')
         }
         if(!input.password === input.re_password){
             return res.status(401)
             .send('passwords should match')
         }     
-
             if(!validator.isEmail(req.body.email)){
                return res.status(402)
                .send('email should be like: example@example.com')
@@ -70,7 +69,7 @@ router.post('/user/signup', async (req,res) => {
        
         const hashedPassword = await bcrypt.hash(req.body.password,8)
 
-        const user = await prisma.user.create({
+        const preActiveUSer = await prisma.user.create({
             data:{
                 first_name:req.body.first_name,
                 last_name:req.body.last_name,
@@ -78,9 +77,10 @@ router.post('/user/signup', async (req,res) => {
                 email:req.body.email
             }
         })
-        sendVerifyEmail(user)
-        res.status(201).send()}catch(e){
-            res.status(404).send(e.message)
+        sendVerifyEmail(preActiveUSer)
+        
+        res.status(200).cookie('login', {preActiveUSer}).redirect('/')}catch(e){
+            res.status(404).send(e)
         }
 })
 
