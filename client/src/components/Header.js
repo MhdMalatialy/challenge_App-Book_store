@@ -1,5 +1,7 @@
 import {Component} from 'react'
 import { connect } from 'react-redux'
+import Login from './login'
+
 
 class Header extends Component {
   renderContent(){
@@ -16,11 +18,7 @@ class Header extends Component {
           </ul>
         </div>
         <div className="top-bar-right">
-          <form action='/user/login' className="menu" method="post">
-            <li><input type="text" placeholder="email" name='email'/></li>
-            <li><input type="password" placeholder="password" name='password'/></li>
-            <li><button type="submit" className="button">Login</button></li>
-          </form>
+          <Login/>
         </div>
       </div>)
       default:
@@ -34,7 +32,7 @@ class Header extends Component {
             </div>
             <div className="top-bar-right">
               <form className="menu">
-                <li><a href = "/user/logout"><button type="button" className="button">Logout</button></a></li>
+                <li><a href = "/user/logout" ><button type="button" className="button">Logout</button></a></li>
               </form>
             </div>
           </div>)

@@ -63,7 +63,7 @@ router.post('/user/login',async (req,res) => {
       if(!user) {
         return res.status(401).send('undefined user')
     }
-    if(user.googleId){
+    if(user.googleId && !user.password){
         return res.status(401).send('use google to login please')
     }
     const isMatch = await bcrypt.compare(input.password,user.password)
@@ -71,8 +71,8 @@ router.post('/user/login',async (req,res) => {
         return res.status(403).send('incorrect password')
     }
     if(!user.activated){
-        const unActivatedUser = user
-        return res.status(200).cookie('login', {unActivatedUser}).redirect('/')
+        const preActiveUser = user
+        return res.status(200).cookie('login', {preActiveUser}).redirect('/')
     }
     const token = jwt.sign({ id: user.id.toString() }
     , process.env.JWTKEY);

@@ -69,7 +69,7 @@ router.post('/user/signup', async (req,res) => {
        
         const hashedPassword = await bcrypt.hash(req.body.password,8)
 
-        const preActiveUSer = await prisma.user.create({
+        const preActiveUser = await prisma.user.create({
             data:{
                 first_name:req.body.first_name,
                 last_name:req.body.last_name,
@@ -77,9 +77,9 @@ router.post('/user/signup', async (req,res) => {
                 email:req.body.email
             }
         })
-        sendVerifyEmail(preActiveUSer)
+        sendVerifyEmail(preActiveUser)
         
-        res.status(200).cookie('login', {preActiveUSer}).redirect('/')}catch(e){
+        res.status(200).cookie('login', {preActiveUser}).redirect('/')}catch(e){
             res.status(404).send(e)
         }
 })

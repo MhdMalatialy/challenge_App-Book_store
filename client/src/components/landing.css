@@ -3,44 +3,44 @@
   height: 42px;
   background-color: #4285f4;
   border-radius: 2px;
-  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);}
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+}
 .google-icon-wrapper {
-    position: absolute;
-    margin-top: 1px;
-    margin-left: 1px;
-    width: 40px;
-    height: 40px;
-    border-radius: 2px;
-    background-color: #fff;
-  }
-  .google-icon {
-    position: absolute;
-    margin-top: 11px;
-    margin-left: 11px;
-    width: 18px;
-    height: 18px;
-  }
-  .btn-text {
-    float: right;
-    margin: 11px 11px 0 0;
-    color: #fff;
-    font-size: 14px;
-    letter-spacing: 0.2px;
-    font-family: "Roboto";
-  }
-  #shadow:hover {
-    box-shadow: 0 0 6px #4285f4;
-  }
-  #shadow:active {
-    background:#1669F2;
-  }
+  position: absolute;
+  margin-top: 1px;
+  margin-left: 1px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+.google-icon {
+  position: absolute;
+  margin-top: 11px;
+  margin-left: 11px;
+  width: 18px;
+  height: 18px;
+}
+.btn-text {
+  float: right;
+  margin: 11px 11px 0 0;
+  color: #fff;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  font-family: "Roboto";
+}
+#shadow:hover {
+  box-shadow: 0 0 6px #4285f4;
+}
+#shadow:active {
+  background: #1669f2;
+}
 body {
   background-image: url("https://wallpaperaccess.com/full/124383.jpg");
-  
 }
 .login-box {
   background: rgba(64, 75, 70, 0.178);
-  border: 0px solid #ddd; 
+  border: 0px solid #ddd;
   margin: 20px 0px 10px 200px;
   width: 500px;
   height: 600px;
@@ -50,65 +50,67 @@ body {
   width: 200px;
   height: 200px;
 }
-.google-box{
-    margin:200px 0px 0px 30px;
-    width: 255px;
-    height: 255px;
+.google-box {
+  margin: 200px 0px 0px 30px;
+  width: 255px;
+  height: 255px;
 }
 .label {
-    color: rgb(0, 0, 0);
-    padding: 4px;
-    background: #fff;
-    font-size: 18px;
-    text-align: left; 
-  }
+  color: rgb(0, 0, 0);
+  padding: 4px;
+  background: #fff;
+  font-size: 18px;
+  text-align: left;
+}
 .center {
-    text-align: center;
-    color: black;
-    background: rgba(255, 255, 255, 0.137);
-    padding: top 5px; ;
-  }
-  .or{
-    font-size: 100px;
-    font-family: "Roboto";
-    color: #4285f4;
-  }
-  .welcome-box {
-    background: rgba(0, 0, 0, 0.685);
-    border: 0px solid #ddd; 
-    margin: 50px 1px 70px 55px;
-    width: 1000px;
-    height: 180px;
-
-  }
-  .welcome-h1{
-    text-align: center;
-    color: azure;
-    font-size: 40px;
-    font-family: 'Gill Sans';
-    margin-top: 30px;
-  }
-  .welcome-h2{
-    text-align: center;
-    color: azure;
-    font-size: 30px;
-    font-family:'Lucida Sans';
-    margin-top: 15px;
-    margin-bottom: 30px;
-    }
-    .search-box{
-      margin: 0px 1px 10px 150px;
-      width: 800px;
-      height: 180px;
-    }
-    .center-box{
-      margin: auto;
-      width: 400px;
-      height: 180px;
-    }
-    .button-style{
-      margin: 25px 85px 0px 85px;
-    }
-    
-
-  
+  text-align: center;
+  color: black;
+  background: rgba(255, 255, 255, 0.137);
+  padding: top 5px;
+}
+.or {
+  font-size: 100px;
+  font-family: "Roboto";
+  color: #4285f4;
+}
+.welcome-box {
+  background: rgba(0, 0, 0, 0.685);
+  border: 0px solid #ddd;
+  margin: 50px 1px 70px 55px;
+  width: 1000px;
+  height: 180px;
+}
+.welcome-h1 {
+  text-align: center;
+  color: azure;
+  font-size: 40px;
+  font-family: "Gill Sans";
+  margin-top: 30px;
+}
+.welcome-h2 {
+  text-align: center;
+  color: azure;
+  font-size: 30px;
+  font-family: "Lucida Sans";
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+.search-box {
+  margin: 0px 1px 10px 150px;
+  width: 800px;
+  height: 180px;
+}
+.center-box {
+  margin: auto;
+  width: 400px;
+  height: 180px;
+}
+.button-style {
+  margin: 25px 85px 0px 85px;
+}
+.verify-box {
+  background: rgba(0, 0, 0, 0.685);
+  width: 1000px;
+  height: 180px;
+  margin: auto;
+}

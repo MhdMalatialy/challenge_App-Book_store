@@ -2,12 +2,21 @@ import {Component} from 'react'
 import { connect } from 'react-redux'
 import { Button,Container,Row ,Col,Form,Spinner,Card,FormControl} from 'react-bootstrap';
 import SIGNUP from './signup'
+import Cookies from 'universal-cookie'
+import Verify from './verifyPage';
+const cookies = new Cookies()
 class Landing extends Component {
   renderContent(){
-    console.log(this.props.auth)
+    let email
+    const temp = cookies.get('login');
+
+    if(temp &&  temp.preActiveUser){
+      email = temp.preActiveUser.email
+    }
+    
     switch(this.props.auth){
       case null:
-        return <Spinner className ="center" animation="grow" />
+        return <Spinner className ="search-box" animation="grow" />
       case false:
           return(
     <div>
@@ -84,19 +93,8 @@ class Landing extends Component {
           </Container> )
           }
           else{
-            return(
-            <div className="welcome-box">
-            <div>
-                <h1 className="welcome-h1">
-                    Welcome to Book-Store
-                </h1>
-                <h2 className="welcome-h2">
-                Check your email to verify your account
-                </h2>
-            </div>
-      </div>)
+            return <Verify email={email} />
           }
-       
     }
   }
     render(){

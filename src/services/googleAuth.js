@@ -15,16 +15,24 @@ passport.use(new GoogleStrategy({
       const email = profile.emails && profile.emails[0].value;
       const name = profile.name
       const googleId = profile.id
-        user = await prisma.user.upsert(
+      const exist = await prisma.user.findUnique({where:{email}})
+      if (exist && !exist.googleId){
+        user = await prisma.user.update({
+          where:{email},
+          update:{googleId}
+        })
+      }
+      else{
+        user = await prisma.user.create(
           {
-              where:{googleId},
-              update:{},
-              create:{googleId,
+            data:{
+            googleId,
                 email,
                 first_name:name.givenName,
                 last_name: name.familyName
             }
             })
+          }
       if (user.activated===false){
         user = await prisma.user.update({
             where:{

@@ -6,8 +6,7 @@ import Header from './Header'
 import Landing from './landing'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './landing.css'
-import beforeVerify from './beforeVerfiy'
-// import Login from './signin' 
+ 
 class App extends Component {
     componentDidMount() {  
       this.props.fetchUser();
