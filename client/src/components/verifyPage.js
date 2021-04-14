@@ -17,7 +17,7 @@ export default class Verify extends Component {
         e.preventDefault()
         const userObject = {
             email: this.props.email};
-        axios.post('/verify/resend', userObject).then(alert('hi'))
+        axios.post('/verify/resend', userObject)
             .catch((error) => { 
                alert(error.response.data)
               
@@ -37,7 +37,7 @@ export default class Verify extends Component {
            </h2>
          </div>
          <form onSubmit={this.onSubmit} >
-            <Button type="submit" >Login</Button>
+            <Button type="submit" >Resend email</Button>
          </form>
         </div>
     )
