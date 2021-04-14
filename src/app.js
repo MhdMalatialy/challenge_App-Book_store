@@ -4,7 +4,7 @@ const {Sequelize} = require('sequelize')
 const signupRouter = require('./routes/signup')
 const signinRouter = require('./routes/signin')
 const verifyRouter = require('./routes/verification')
-// const passport = require('passport');
+const searchRouter = require('./routes/searchForBook')
 const cookie_parser=require('cookie-parser')
 const app = express()
 const bodyParser = require('body-parser')
@@ -57,6 +57,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(signupRouter)
 app.use(signinRouter)
 app.use(verifyRouter)
+app.use(searchRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const PORT = process.env.PORT
 connectDB()

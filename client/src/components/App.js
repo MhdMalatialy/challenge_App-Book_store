@@ -21,10 +21,6 @@ class App extends Component {
                <Landing/>
                </Route>
            </div>
-           {/* <div className="grid-container"> */}
-               {/* <Route exact path="/verify" component={beforeVerify}/> */}
-               {/* <Route exact path="/login" component={Login }/> */}
-           {/* </div>      */}
            </BrowserRouter>
         </div>   
     )

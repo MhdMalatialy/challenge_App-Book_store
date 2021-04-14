@@ -1,9 +1,10 @@
 import {Component} from 'react'
 import { connect } from 'react-redux'
-import { Button,Container,Row ,Col,Form,Spinner,Card,FormControl} from 'react-bootstrap';
+import { Container,Row ,Col,Spinner,Card} from 'react-bootstrap';
 import SIGNUP from './signup'
 import Cookies from 'universal-cookie'
 import Verify from './verifyPage';
+import SearchPage from './homePage'
 const cookies = new Cookies()
 class Landing extends Component {
   renderContent(){
@@ -52,45 +53,12 @@ class Landing extends Component {
         </Row> 
         </Container>
     </div>
-
         )
       default:
         if(this.props.auth.user){
         return (
-          <Container>
-            <Row>
-              <div className="welcome-box">
-                <div>
-                  <h1 className="welcome-h1">
-                    Book-Store
-                  </h1>
-                  <h2 className="welcome-h2">
-                    The book which you looking for is here
-                  </h2>
-                </div>
-              </div>
-            </Row>
-            <Row>
-              <div className="search-box">
-                  <Form >
-                    <Container>
-                      <Row>
-                        <FormControl type="text" placeholder="Search" />
-                      </Row>
-                        <div className="button-style">
-                          < Button variant="primary" size="lg" block>
-                            Block level button
-                          </Button>
-                          <Button variant="secondary" block>
-                            Block level button
-                          </Button>
-                        </div>
-                 
-                    </Container>
-                  </Form>
-              </div>
-            </Row>
-          </Container> )
+          <SearchPage/>
+        )
           }
           else{
             return <Verify email={email} />

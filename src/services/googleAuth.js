@@ -16,13 +16,14 @@ passport.use(new GoogleStrategy({
       const name = profile.name
       const googleId = profile.id
       const exist = await prisma.user.findUnique({where:{email}})
+      user = exist
       if (exist && !exist.googleId){
         user = await prisma.user.update({
           where:{email},
           update:{googleId}
         })
       }
-      else{
+      else if(!exist){
         user = await prisma.user.create(
           {
             data:{
@@ -32,14 +33,14 @@ passport.use(new GoogleStrategy({
                 last_name: name.familyName
             }
             })
+            if (user.activated===false){
+              user = await prisma.user.update({
+                  where:{
+                      googleId},
+                  data:{
+                      activated:true}})
+            }
           }
-      if (user.activated===false){
-        user = await prisma.user.update({
-            where:{
-                googleId},
-            data:{
-                activated:true}})
-      }
       const token = jwt.sign({_id:user.id}, process.env.JWTKEY,{
         expiresIn: 604800 // 1 week
       });

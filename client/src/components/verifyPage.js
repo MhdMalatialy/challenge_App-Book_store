@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {Button} from 'react-bootstrap'
 import axios from 'axios';
-import Cookies from 'universal-cookie'
-const cookies = new Cookies()
-
 export default class Verify extends Component {
     constructor(props) {
         super(props)

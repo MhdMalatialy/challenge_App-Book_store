@@ -114,3 +114,12 @@ body {
   height: 180px;
   margin: auto;
 }
+.photo {
+  height: 400px;
+  width: 400px;
+  margin: 0px 0px 10px 350px;
+  background-image: none;
+}
+.noBack {
+  background-color: rgba(255, 255, 255, 0);
+}
