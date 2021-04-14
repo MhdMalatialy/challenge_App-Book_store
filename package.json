@@ -14,6 +14,7 @@
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
+    "path": "^0.12.7",
     "pg": "^8.5.1",
     "postcss-modules-extract-imports": "^3.0.0",
     "react-foundation": "^0.9.7",
@@ -26,7 +27,7 @@
   "scripts": {
     "start": "node src/app.js",
     "server": "nodemon src/app.js",
-    "heroku-postbuild": "npx prisma migrate dev --preview-feature --schema=src/prisma/schema.prisma && npx prisma generate --schema=src/prisma/schema.prisma",
+    "heroku-postbuild": "npx prisma migrate dev --preview-feature --schema=src/prisma/schema.prisma && npx prisma generate --schema=src/prisma/schema.prisma && NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },

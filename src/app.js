@@ -5,6 +5,7 @@ const signupRouter = require('./routes/signup')
 const signinRouter = require('./routes/signin')
 const verifyRouter = require('./routes/verification')
 const searchRouter = require('./routes/searchForBook')
+const path = require('path');
 const cookie_parser=require('cookie-parser')
 const app = express()
 const bodyParser = require('body-parser')
@@ -61,6 +62,13 @@ app.use(searchRouter)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 const PORT = process.env.PORT
 connectDB()
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/build', '../client', 'index.html'));
+  });
+}
 app.listen((PORT),() => {
     console.log("Express server listening on port "+PORT);
   });
