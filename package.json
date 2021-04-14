@@ -27,7 +27,7 @@
   "scripts": {
     "start": "node src/app.js",
     "server": "nodemon src/app.js",
-    "heroku-postbuild": "npx prisma migrate dev --preview-feature --schema=src/prisma/schema.prisma && npx prisma generate --schema=src/prisma/schema.prisma",
+    "heroku-postbuild": "npx prisma migrate dev --preview-feature --schema=src/prisma/schema.prisma && npx prisma generate --schema=src/prisma/schema.prisma && NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
