@@ -1,3 +1,9 @@
+Full-stack application using Nodejs Reactjs and Postgresql,
+includes, signup and verifying account via email, login, login
+using google, then get a description about a book.
+
+---
+
 the app has access to these books in the free tier:
 To Kill a Mockingbird
 1984
